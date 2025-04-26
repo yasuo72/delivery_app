@@ -1,0 +1,167 @@
+/* Swiggy-like theme for the food delivery app */
+:root {
+  --primary: #fc8019;
+  --primary-hover: #ff9933;
+  --background: #fff7ed;
+  --card: #fff;
+  --border: #f0f0f0;
+  --text: #282c3f;
+  --text-light: #686b78;
+  --shadow: 0 2px 8px #fc801933;
+  --radius: 16px;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+}
+
+.swiggy-navbar {
+  background: #fff;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 36px 10px 36px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.swiggy-navbar-logo {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 1px;
+  background: linear-gradient(90deg,#fc8019,#ff9933 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.swiggy-navbar-menu {
+  display: flex;
+  gap: 24px;
+}
+
+.swiggy-navbar-menu button {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.swiggy-navbar-menu button.active,
+.swiggy-navbar-menu button:hover {
+  color: var(--primary);
+}
+
+.swiggy-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.swiggy-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.swiggy-cart {
+  position: fixed;
+  right: 36px;
+  bottom: 36px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+  min-width: 280px;
+  z-index: 200;
+}
+
+.swiggy-btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px #fc801955;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.swiggy-btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.swiggy-address-select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+.swiggy-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+  font-size: 1rem;
+}
+
+.swiggy-section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+
+.swiggy-restaurant-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 24px;
+}
+
+.swiggy-restaurant-card {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  background: #fff;
+  padding: 18px 18px 14px 18px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.swiggy-restaurant-card:hover {
+  box-shadow: 0 4px 20px #fc801955;
+  transform: translateY(-4px) scale(1.02);
+}
+
+.swiggy-restaurant-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.swiggy-restaurant-cuisine {
+  color: var(--text-light);
+  font-size: 0.98rem;
+  margin-bottom: 8px;
+}
+
+.swiggy-restaurant-meta {
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
