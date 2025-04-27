@@ -18,7 +18,13 @@ function Register({ onRegister }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password, role })
       });
-      const data = await res.json();
+      let data;
+      const contentType = res.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        data = await res.json();
+      } else {
+        data = {};
+      }
       if (!res.ok) throw new Error(data.message || 'Registration failed');
       setSuccess('Registration successful! Please login.');
       onRegister && onRegister();

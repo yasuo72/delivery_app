@@ -14,7 +14,13 @@ function Login({ onLogin }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
-      const data = await res.json();
+      let data;
+      const contentType = res.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        data = await res.json();
+      } else {
+        data = {};
+      }
       if (!res.ok) throw new Error(data.message || 'Login failed');
       localStorage.setItem('token', data.token);
       onLogin && onLogin(data.user);
