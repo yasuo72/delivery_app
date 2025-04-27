@@ -11,7 +11,7 @@ function CouponInput({ orderTotal, onApply }) {
     setLoading(true);
     setStatus('');
     setDiscount(0);
-    const res = await fetch('http://localhost:5001/api/coupons/validate', {
+    const res = await fetch('/api/coupons/validate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code, orderTotal })

@@ -16,20 +16,20 @@ function AdminDashboard() {
 
   const fetchOrders = async () => {
     setLoading(true);
-    const res = await fetch('http://localhost:5001/api/orders/all');
+    const res = await fetch('/api/orders/all');
     const data = await res.json();
     setOrders(data);
     setLoading(false);
   };
 
   const fetchDeliveryPartners = async () => {
-    const res = await fetch('http://localhost:5001/api/auth/delivery-partners');
+    const res = await fetch('/api/auth/delivery-partners');
     const data = await res.json();
     setDeliveryPartners(data);
   };
 
   const handleStatusChange = async (orderId, status) => {
-    await fetch(`http://localhost:5001/api/orders/${orderId}`, {
+    await fetch(`/api/orders/${orderId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status })
@@ -39,7 +39,7 @@ function AdminDashboard() {
 
   const handleAssign = async (orderId, deliveryPartnerId) => {
     setAssigning(orderId);
-    await fetch(`http://localhost:5001/api/orders/${orderId}/assign`, {
+    await fetch(`/api/orders/${orderId}/assign`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ deliveryPartnerId })

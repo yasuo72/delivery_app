@@ -8,7 +8,7 @@ export default function RestaurantDashboard({ user }) {
 
   useEffect(() => {
     const fetchRestaurant = async () => {
-      const res = await fetch(`http://localhost:5001/api/restaurants/by-owner/${user._id}`);
+      const res = await fetch(`/api/restaurants/by-owner/${user._id}`);
       const data = await res.json();
       setRestaurant(data);
     };
@@ -23,7 +23,7 @@ export default function RestaurantDashboard({ user }) {
   const fetchMenu = async () => {
     if (!restaurant) return;
     setLoading(true);
-    const res = await fetch(`http://localhost:5001/api/menu/restaurant/${restaurant._id}`);
+    const res = await fetch(`/api/menu/restaurant/${restaurant._id}`);
     const data = await res.json();
     setMenu(data);
     setLoading(false);
@@ -45,7 +45,7 @@ export default function RestaurantDashboard({ user }) {
     e.preventDefault();
     if (!restaurant) return;
     setLoading(true);
-    const res = await fetch('http://localhost:5001/api/menu', {
+    const res = await fetch('/api/menu', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...form, restaurantId: restaurant._id })

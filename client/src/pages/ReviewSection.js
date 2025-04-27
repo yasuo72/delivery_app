@@ -12,7 +12,7 @@ function ReviewSection({ restaurantId, user, orderId }) {
   }, [restaurantId]);
 
   const fetchReviews = async () => {
-    const res = await fetch(`http://localhost:5001/api/reviews/${restaurantId}`);
+    const res = await fetch(`/api/reviews/${restaurantId}`);
     const data = await res.json();
     setReviews(data);
   };
@@ -20,7 +20,7 @@ function ReviewSection({ restaurantId, user, orderId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
-    const res = await fetch('http://localhost:5001/api/reviews', {
+    const res = await fetch('/api/reviews', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

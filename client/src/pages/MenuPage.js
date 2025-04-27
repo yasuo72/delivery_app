@@ -16,7 +16,7 @@ function MenuPage({ restaurant, onBack, onAddToCart, user, orderId }) {
 
   const fetchMenu = async () => {
     setLoading(true);
-    const res = await fetch(`http://localhost:5001/api/menu/${restaurant._id}`);
+    const res = await fetch(`/api/menu/${restaurant._id}`);
     const data = await res.json();
     setMenu(data);
     setLoading(false);

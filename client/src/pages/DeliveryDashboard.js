@@ -12,7 +12,7 @@ export default function DeliveryDashboard({ user }) {
   const fetchOrders = async () => {
     setLoading(true);
     // You may want to fetch only orders assigned to this delivery partner
-    const res = await fetch(`http://localhost:5001/api/orders/delivery/${user._id}`);
+    const res = await fetch(`/api/orders/delivery/${user._id}`);
     const data = await res.json();
     setOrders(data);
     setLoading(false);

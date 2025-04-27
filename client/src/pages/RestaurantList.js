@@ -13,7 +13,7 @@ function RestaurantList({ onSelect }) {
 
   const fetchRestaurants = async (q = '') => {
     setLoading(true);
-    const url = q ? `http://localhost:5001/api/restaurants?q=${encodeURIComponent(q)}` : 'http://localhost:5001/api/restaurants';
+    const url = q ? `/api/restaurants?q=${encodeURIComponent(q)}` : '/api/restaurants';
     const res = await fetch(url);
     const data = await res.json();
     setRestaurants(data);
