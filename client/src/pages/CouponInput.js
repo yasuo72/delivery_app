@@ -6,12 +6,14 @@ function CouponInput({ orderTotal, onApply }) {
   const [discount, setDiscount] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  const apiUrl = process.env.REACT_APP_API_URL || '';
+
   const handleApply = async (e) => {
     e.preventDefault();
     setLoading(true);
     setStatus('');
     setDiscount(0);
-    const res = await fetch('/api/coupons/validate', {
+    const res = await fetch(`${apiUrl}/coupons/validate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code, orderTotal })

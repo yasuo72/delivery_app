@@ -6,15 +6,17 @@ export function AddressProvider({ userId, children }) {
   const [addresses, setAddresses] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const apiUrl = process.env.REACT_APP_API_URL || '';
+
   const fetchAddresses = useCallback(async () => {
     if (!userId) return;
     setLoading(true);
-    const res = await fetch(`http://localhost:5001/api/addresses/user/${userId}`);
+    const res = await fetch(`${apiUrl}/addresses/user/${userId}`);
     let data = await res.json();
     if (!Array.isArray(data)) data = [];
     setAddresses(data);
     setLoading(false);
-  }, [userId]);
+  }, [userId, apiUrl]);
 
   const addAddress = async (address) => {
     // Ensure userId is a valid ObjectId string
@@ -23,7 +25,7 @@ export function AddressProvider({ userId, children }) {
     if (userIdStr && typeof userIdStr !== 'string') userIdStr = String(userIdStr);
     // Debug log
     console.log('Adding address with userId:', userIdStr, 'address:', address);
-    const res = await fetch('http://localhost:5001/api/addresses', {
+    const res = await fetch(`${apiUrl}/addresses`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...address, userId: userIdStr })
@@ -39,7 +41,7 @@ export function AddressProvider({ userId, children }) {
   };
 
   const deleteAddress = async (id) => {
-    await fetch(`http://localhost:5001/api/addresses/${id}`, { method: 'DELETE' });
+    await fetch(`${apiUrl}/addresses/${id}`, { method: 'DELETE' });
     await fetchAddresses();
   };
 

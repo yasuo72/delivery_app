@@ -11,9 +11,10 @@ function RestaurantList({ onSelect }) {
     fetchRestaurants();
   }, []);
 
+  const apiUrl = process.env.REACT_APP_API_URL || '';
   const fetchRestaurants = async (q = '') => {
     setLoading(true);
-    const url = q ? `/api/restaurants?q=${encodeURIComponent(q)}` : '/api/restaurants';
+    const url = q ? `${apiUrl}/restaurants?q=${encodeURIComponent(q)}` : `${apiUrl}/restaurants`;
     const res = await fetch(url);
     const data = await res.json();
     setRestaurants(data);

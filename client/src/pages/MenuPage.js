@@ -7,6 +7,8 @@ function MenuPage({ restaurant, onBack, onAddToCart, user, orderId }) {
   const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const apiUrl = process.env.REACT_APP_API_URL || '';
+
   useEffect(() => {
     if (restaurant) {
       fetchMenu();
@@ -16,7 +18,7 @@ function MenuPage({ restaurant, onBack, onAddToCart, user, orderId }) {
 
   const fetchMenu = async () => {
     setLoading(true);
-    const res = await fetch(`/api/menu/${restaurant._id}`);
+    const res = await fetch(`${apiUrl}/menu/${restaurant._id}`);
     const data = await res.json();
     setMenu(data);
     setLoading(false);

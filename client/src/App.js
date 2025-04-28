@@ -33,6 +33,8 @@ function App() {
   const [dark, setDark] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
 
+  const apiUrl = process.env.REACT_APP_API_URL || '';
+
   const handleAddToCart = (item) => {
     setCart(prev => {
       const existing = prev.find(i => i._id === item._id);
@@ -58,7 +60,7 @@ function App() {
     const items = cart.map(i => ({ menuItem: i._id, name: i.name, price: i.price, qty: i.qty }));
     const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
     const total = Math.max(0, subtotal - couponDiscount);
-    const res = await fetch('http://localhost:5001/api/orders', {
+    const res = await fetch(`${apiUrl}/orders`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -85,7 +87,7 @@ function App() {
   };
 
   const fetchOrderHistory = async () => {
-    const res = await fetch(`http://localhost:5001/api/orders/user/${user._id}`);
+    const res = await fetch(`${apiUrl}/orders/user/${user._id}`);
     const data = await res.json();
     setOrderHistory(data);
   };

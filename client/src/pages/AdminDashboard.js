@@ -6,6 +6,8 @@ function AdminDashboard() {
   const [deliveryPartners, setDeliveryPartners] = useState([]);
   const [assigning, setAssigning] = useState(null);
 
+  const apiUrl = process.env.REACT_APP_API_URL || '';
+
   useEffect(() => {
     fetchOrders();
     fetchDeliveryPartners();
@@ -16,35 +18,35 @@ function AdminDashboard() {
 
   const fetchOrders = async () => {
     setLoading(true);
-    const res = await fetch('/api/orders/all');
+    const res = await fetch(`${apiUrl}/orders/all`);
     const data = await res.json();
     setOrders(data);
     setLoading(false);
   };
 
   const fetchDeliveryPartners = async () => {
-    const res = await fetch('/api/auth/delivery-partners');
+    const res = await fetch(`${apiUrl}/auth/delivery-partners`);
     const data = await res.json();
     setDeliveryPartners(data);
   };
 
-  const handleStatusChange = async (orderId, status) => {
-    await fetch(`/api/orders/${orderId}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status })
-    });
-    fetchOrders();
-  };
-
   const handleAssign = async (orderId, deliveryPartnerId) => {
     setAssigning(orderId);
-    await fetch(`/api/orders/${orderId}/assign`, {
+    await fetch(`${apiUrl}/orders/${orderId}/assign`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ deliveryPartnerId })
     });
     setAssigning(null);
+    fetchOrders();
+  };
+
+  const handleStatusChange = async (orderId, status) => {
+    await fetch(`${apiUrl}/orders/${orderId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status })
+    });
     fetchOrders();
   };
 

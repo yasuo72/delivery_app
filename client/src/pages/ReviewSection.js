@@ -6,13 +6,15 @@ function ReviewSection({ restaurantId, user, orderId }) {
   const [comment, setComment] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
+  const apiUrl = process.env.REACT_APP_API_URL || '';
+
   useEffect(() => {
     fetchReviews();
     // eslint-disable-next-line
   }, [restaurantId]);
 
   const fetchReviews = async () => {
-    const res = await fetch(`/api/reviews/${restaurantId}`);
+    const res = await fetch(`${apiUrl}/reviews/${restaurantId}`);
     const data = await res.json();
     setReviews(data);
   };
@@ -20,7 +22,7 @@ function ReviewSection({ restaurantId, user, orderId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
-    const res = await fetch('/api/reviews', {
+    const res = await fetch(`${apiUrl}/reviews`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

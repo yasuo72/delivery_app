@@ -6,9 +6,11 @@ export default function RestaurantDashboard({ user }) {
   const [loading, setLoading] = useState(false);
   const [restaurant, setRestaurant] = useState(null);
 
+  const apiUrl = process.env.REACT_APP_API_URL || '';
+
   useEffect(() => {
     const fetchRestaurant = async () => {
-      const res = await fetch(`/api/restaurants/by-owner/${user._id}`);
+      const res = await fetch(`${apiUrl}/restaurants/by-owner/${user._id}`);
       const data = await res.json();
       setRestaurant(data);
     };
@@ -23,7 +25,7 @@ export default function RestaurantDashboard({ user }) {
   const fetchMenu = async () => {
     if (!restaurant) return;
     setLoading(true);
-    const res = await fetch(`/api/menu/restaurant/${restaurant._id}`);
+    const res = await fetch(`${apiUrl}/menu/restaurant/${restaurant._id}`);
     const data = await res.json();
     setMenu(data);
     setLoading(false);
@@ -45,7 +47,7 @@ export default function RestaurantDashboard({ user }) {
     e.preventDefault();
     if (!restaurant) return;
     setLoading(true);
-    const res = await fetch('/api/menu', {
+    const res = await fetch(`${apiUrl}/menu`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...form, restaurantId: restaurant._id })
